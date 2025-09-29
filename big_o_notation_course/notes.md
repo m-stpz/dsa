@@ -350,8 +350,6 @@ This fib is O(2^n)
 Recursion 1
 fib(4)
 n = 4
-
-
 */
 function fib(n) {
   // base case 1
@@ -365,5 +363,84 @@ function fib(n) {
   }
 
   return fib(n - 1) + fib(n - 2);
+}
+```
+
+## Factorial
+
+```js
+// O(n!)
+function factorial(n) {
+  if (n === 0) {
+    return;
+  }
+
+  for (let i = 0; i < n; i++) {
+    factorial(n - 1);
+  }
+}
+
+/* 
+factorial(3)
+3! = 3 x 2 x 1 = 6
+
+n = 3
+O(3!) => O(n!)
+
+for each index: 0, 1,2
+
+factorial(3-1)  factorial(3-1) factorial(3-1)
+factorial (2)
+factorial (2-1)
+factorial (1)
+*/
+```
+
+## Space Complexity & Common Mistakes
+
+```js
+function countDown(n) {
+  if (n === 0) {
+    return;
+  }
+
+  return countDown(n - 1);
+}
+
+/* 
+countDown(5) 
+5-1 => countDown(4)
+4-1 => countDown(3)
+...
+1-1 => countDown(0) => the function above this, on the callstack, still exist and are waiting the return
+*/
+```
+
+### Common Mistakes
+
+```js
+/* 
+The sequential loops below don't represent O(n), but instead:
+O(a+b), since we don't know the length of the a or b
+*/
+function twoInputsAdd(a, b) {
+  for (let i = 0; i < a; i++) {
+    // do something
+  }
+
+  for (let i = 0; i < b; i++) {
+    // do something
+  }
+}
+
+/* 
+The algo below isn't O(n^2) because it's not O(n*n), instead O(a*b), since the inputs are of different length
+*/
+function twoInputsMulti(a, b) {
+  for (let i = 0; i < a; i++) {
+    for (let i = 0; i < b; i++) {
+      // do something
+    }
+  }
 }
 ```
