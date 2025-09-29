@@ -276,6 +276,18 @@ because 2^2 = 4
 ### Merge Sort complexity deep dive
 
 ```js
+/*  
+n => the length of our array
+
+example arr: [0,5,10, 2,12]
+          length 5
+
+          index is 0 based, length isn't
+
+log base 2 of 5 is 2.32, but 👉 In merge sort complexity, we usually take the ceiling when reasoning about recursion depth
+log(2)5 = 3
+*/
+
 function mergeSort(arr) {
   // base case => when we leave it
   if (arr.length <= 1) {
@@ -291,6 +303,7 @@ function mergeSort(arr) {
 }
 
 // takes already sorted arrays and compares them
+
 function merge(left, right) {
   const result = [];
   const leftIndex = 0;
@@ -324,5 +337,33 @@ function merge(left, right) {
 
   // add all the missing elements, which will already be sorted
   return [...result, ...left.slice(leftIndex), ...right.slice(rightIndex)];
+}
+```
+
+## Fibonacci & Exponential Complexity
+
+```js
+/* 
+Exponential
+This fib is O(2^n)
+
+Recursion 1
+fib(4)
+n = 4
+
+
+*/
+function fib(n) {
+  // base case 1
+  if (n === 0) {
+    return 0;
+  }
+
+  // base case 2
+  if (n === 1) {
+    return 1;
+  }
+
+  return fib(n - 1) + fib(n - 2);
 }
 ```
