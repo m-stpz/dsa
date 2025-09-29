@@ -272,3 +272,57 @@ because 2^2 = 4
   - The array of length 1 is already sorted
 
 > See mergeSort.js
+
+### Merge Sort complexity deep dive
+
+```js
+function mergeSort(arr) {
+  // base case => when we leave it
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  // divide and conquer
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+
+  return merge(left, right);
+}
+
+// takes already sorted arrays and compares them
+function merge(left, right) {
+  const result = [];
+  const leftIndex = 0;
+  const rightIndex = 0;
+
+  /* 
+  [0,5,10][2,12]
+  [0, 2, 5, 10] => here, we "break" the loop, because leftIndex > left.length (3)
+    0 -> leftIndex+1
+    5 -> leftIndex+1
+    10 -> leftIndex+1
+
+    leftIndex(3) > left.length(2) => break the loop, but I still need "12"
+
+    That's why we need this return 
+    return [...result, ...left.slice(leftIndex), ...right.slice(rightIndex)];
+
+    2 -> rightIndex+1
+    right.slice(1) from 1 onwards, add all the missing elements
+  */
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      leftIndex++; // we don't want to repeat this same element
+    } else {
+      result.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+
+  // add all the missing elements, which will already be sorted
+  return [...result, ...left.slice(leftIndex), ...right.slice(rightIndex)];
+}
+```
