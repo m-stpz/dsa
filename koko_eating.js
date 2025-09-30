@@ -14,29 +14,53 @@ Input: piles = [3,6,7,11], h = 8
 Output: 4
 */
 
+/* 
+updated Big O
+t: O(n * k)
+ n = piles
+ k = maximum eating speed (11)
+s: O(1)
+*/
+
 function minEatingSpeed(piles, h) {
-  /* 
-    counter = min_k
+  let eatingSpeed;
+  // we need to treat this
+  if (!piles.length) {
+    eatingSpeed = 0;
+  }
 
-    [3,6,7,11]
-    0 0 0 1
-          0 
+  eatingSpeed = Math.max(...piles); // 11 => eating speed
+  let timeTaken = 0;
 
-    ====
-    iterate the piles while any piles[i] is greater than 0
-        - let's provide a specific number (10)
-        - if 10 > piles[i]
-            piles = 0 
-        - if 10 < piles[i]
-            piles[i] = piles[i] - 10
-         
-    =====
-    how can we figure out speed?
-        start with max_k = greatest piles[i]
-            if hours_taken > total_
-            
-    */
+  // 1. to check when we should stop optimizing
+  const lowerBound = 1;
+
+  while (eatingSpeed >= lowerBound) {
+    // eatingSpeed 10
+    // timeTaken 1
+
+    timeTaken = 0; // clean up the time taken from previous iterations
+
+    // 2. identify time taken to eat all banana given speed
+    for (let i = 0; i < piles.length; i++) {
+      const timeTakenForPile = Math.ceil(piles[i] / eatingSpeed); // 3/11 = 1 + 1 + 1 + 1
+      timeTaken += timeTakenForPile;
+    }
+
+    //
+    if (timeTaken <= h) {
+      // we reduced to find the moment that we crossed the lower limit
+      eatingSpeed--;
+    } else {
+      eatingSpeed++;
+      return eatingSpeed;
+    }
+  }
+
+  return eatingSpeed;
 }
+
+minEatingSpeed([3, 6, 7, 11], 8);
 
 /*  
 h = 8 

@@ -65,3 +65,6 @@ Based on: https://www.youtube.com/watch?v=8hly31xKli0&t
    - Given valid inputs, it must provide expected output
 
 2. Efficiency: Characteristic of algorithm to perform steps in an optmized manner, both in memory and computational operations
+   - Time: how long it takes the algo to run
+     - The less time you take, the more efficiency you are
+   - Space: how much memory the algo needs
