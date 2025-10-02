@@ -68,3 +68,39 @@ Based on: https://www.youtube.com/watch?v=8hly31xKli0&t
    - Time: how long it takes the algo to run
      - The less time you take, the more efficiency you are
    - Space: how much memory the algo needs
+
+## Important Problem-Solving Patterns
+
+### 1. Two pointers
+
+- Effective to process sorted arrays/strings with two indices moving toward or along each other
+- Initialize two pointers and you move them
+  - towards each other
+  - away from each other
+  - in the same direction
+
+```
+1 3 5 7 11
+left    right
+```
+
+```js
+function hasPairWithSum(nums, target) {
+  let l = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    const sum = nums[left] + nums[right];
+
+    if (sum === target) {
+      return true;
+    }
+
+    sum < target ? left++ : right--;
+  }
+
+  return false;
+}
+```
+
+### 2. Sliding Windows
