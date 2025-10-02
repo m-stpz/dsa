@@ -38,7 +38,6 @@ function minEatingSpeed(piles, h) {
   while (eatingSpeed >= lowerBound) {
     // eatingSpeed 10
     // timeTaken 1
-
     timeTaken = 0; // clean up the time taken from previous iterations
 
     // 2. identify time taken to eat all banana given speed
