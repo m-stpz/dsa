@@ -93,4 +93,12 @@ Good for linear data structures
 
 ## Leetcode problems
 
+https://leetcode.com/problem-list/two-pointers/
+
+One suggestion is try to solve, within that topic/approach:
+
+- 5-7 easy problems
+- 2-3 medium problems
+
 1. Move zeroes: https://leetcode.com/problems/move-zeroes/description/
+2. Container with most water: https://leetcode.com/problems/container-with-most-water/description/
