@@ -1,16 +1,21 @@
+# Post Mortem
+
 Problem:
+Problem statement (one-liner):
 Link:
 Date:
 
 ### Algorithm
 
-1. Problem statement (one-liner):
-2. Pattern used:
-3. Key idea (short explanation):
-4. Time to design the algorithm:
-5. Time to code:
+1. Pattern used:
+2. Key idea (short explanation):
+3. Time to design the algorithm:
+4. Time to code:
+5. Big O analysis:
+   t: / Explanation:
+   s: / Explanation:
 6. What solutions did I consider/miss?
-7. What solution optimal?
+7. Was your solution optimal?
 8. What triggers did I find/miss?
 9. Any mistakes I keep making?
    - Any bugs I should add to the Bug List?
