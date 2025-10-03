@@ -17,34 +17,31 @@ Output: [0]
 
 var moveZeroes = function (nums) {
   /* 
-    0   1   0   3   12 
-    back O (track last found zero element)
-        front 1 (tracks next non-zero element)
+    0   1   0   3   12 => objective MOVE ZEROES to the end!
+    back
+      front if found a non-zero element swap them
 
-    swap them 
-    1 0  0   3   12 
-      back 1 becomes front
-            front 3 (if zero continue, if non-zero save it)
+    1 0 0 3 12
+    1 3 0 0 12
+    1 3 12 0 0 
 
-
-    1 0  0   3   12 
-      back becomes front
-            front  (if zero continue, if non-zero save it)
-        back must become front and swap the elements
-
-        [arr[0], arr[1]] = [arr[1], arr[0]]; => swap js
+    1,3,12,0,0 => goal
     */
-  let back = 0;
-  let front = 0;
+  let back = 0; // we should walk the back only when we find a non-zero element and we need to swap
+  let front = 0; // we should always walk the front
 
   while (front <= nums.length) {
     if (nums[front] !== 0) {
-      [nums[back], nums[front]] = [nums[front], nums[back]]; // swap them
+      [nums[back], nums[front]] = [nums[front], nums[back]];
       back++;
     }
 
-    front++;
+    front++; // always walk
   }
 };
 
 moveZeroes([0, 1, 0, 3, 12]);
+
+/* 
+
+*/
