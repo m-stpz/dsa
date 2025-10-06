@@ -4,6 +4,14 @@
 
 Ex: After each iteration, all elements before index back (inclusive) are unique and in sorted order
 
+## On solving algos
+
+- Solve 5 algos per topic
+- Once this is done, try to solve them again
+- Solve 1 medium
+- Go to the next topic
+- After having solved 3 on the next one, solve 1 on the previous one
+
 ## Algorithmic thinking
 
 1. Define invariants early
