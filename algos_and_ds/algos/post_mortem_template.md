@@ -25,6 +25,8 @@ Date:
 
 ### Self-rating
 
+1(terrible) - 5(amazing)
+
 Problem solving:
 Coding:
 Verification:
