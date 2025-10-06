@@ -71,6 +71,85 @@ Based on: https://www.youtube.com/watch?v=8hly31xKli0&t
 
 ## Important Problem-Solving Patterns
 
+### 1. Two pointers
 
+- Reduces the complexity of traversing linear structures. From quadratic to linear
+- Same direction
+  - Processing, scaning the data in a single pass
+    - Fast and slow pointers
+      - Cycle detection
+- Opposite direction
+  - Finding pairs
+  - Comparing elements from opposite ends
+    - Finding two numbers in a sorted array that sum up to target
 
-### 2. Sliding Windows
+https://algo.monster/templates/two-pointers-opposite
+
+#### Two pointers (opposite directions)
+
+```js
+//
+function twoPointers(nums) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    // process current elements
+    let current = process(arr[left], arr[right]);
+
+    // update points on condition
+    if (condition(arr[left], arr[right])) {
+      left++;
+    } else {
+      right++;
+    }
+  }
+}
+```
+
+#### Two pointers (same direction)
+
+```js
+function twoPointers(nums) {
+  let slow = 0;
+  let fast = 0;
+
+  while (fast < nums.length) {
+    // process current elements
+    let current = process(arr[slow], arr[fast]);
+
+    // update pointers based on condition
+    if (condition(arr[slow], arr[fast])) {
+      slow++;
+    }
+
+    // fast always moves forward
+    fast++;
+  }
+}
+```
+
+2. Sliding window
+
+- Extension of two pointers
+- Window of elements
+- Manages a subset of elements
+
+3. Breadth-First Search
+4. Depth-First Search
+5. Backtracking
+6. Heap
+7. Binary search
+8. Dynamic programming
+
+Linear: Arrays, Linked Lists, Strings
+
+- All linear algos are built on top of two pointers
+  Non-linear: Trees, Graphs
+
+## More advanced patterns
+
+9. Divide and conquer
+10. Trie
+11. Union Find
+12. Greedy
