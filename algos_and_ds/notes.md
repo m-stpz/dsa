@@ -71,6 +71,17 @@ Based on: https://www.youtube.com/watch?v=8hly31xKli0&t
 
 ## Important Problem-Solving Patterns
 
+1. Linear: Arrays, Linked Lists, Strings
+
+- All linear algos are built on top of two pointers
+- Two pointers, sliding windows, binary search
+
+2. Non-linear: Trees, Graphs
+
+- Tree: graph (no cycles)
+- Graph (with cycles)
+  - we need to keep track of visited
+
 ### 1. Two pointers
 
 - Reduces the complexity of traversing linear structures. From quadratic to linear
@@ -88,7 +99,6 @@ https://algo.monster/templates/two-pointers-opposite
 #### Two pointers (opposite directions)
 
 ```js
-//
 function twoPointers(nums) {
   let left = 0;
   let right = nums.length - 1;
@@ -129,23 +139,55 @@ function twoPointers(nums) {
 }
 ```
 
-2. Sliding window
+### 2. Sliding window
 
 - Extension of two pointers
 - Window of elements
 - Manages a subset of elements
+- Powerful to track contiguous sequences
 
-3. Breadth-First Search
-4. Depth-First Search
-5. Backtracking
-6. Heap
-7. Binary search
-8. Dynamic programming
+```js
+function slidingWindow(nums, k) {
+  let left = 0;
+  let windowSum = 0;
+  let result = 0; // or [], depending on problem
 
-Linear: Arrays, Linked Lists, Strings
+  for (let right = 0; right < nums.length; right++) {
+    // expand window by including nums[right]
+    windowSum += nums[right];
 
-- All linear algos are built on top of two pointers
-  Non-linear: Trees, Graphs
+    while (conditionToShrink(nums, left, right, k)) {
+      windowSum -= nums[left];
+      left++;
+    }
+
+    result = process(windowSum, left, right, result);
+  }
+
+  return result;
+}
+```
+
+### 3. Binary search
+
+- Finding a target value in a sorted array
+- It's in a way an expansion of the two pointers
+  - left
+  - right
+  - middle
+- It can be used in any list that has a `monotonic function`
+  - any condition that can be used for sorting
+    - find minimum in rotated sorted array
+
+### 4. Breadth-First Search
+
+### 5. Depth-First Search
+
+### 6. Backtracking
+
+### 7. Heap
+
+### 8. Dynamic programming
 
 ## More advanced patterns
 
