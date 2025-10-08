@@ -202,7 +202,7 @@ function binarySearch(nums, target) {
 }
 ```
 
-### 4. Breadth-First Search
+### 4. Breadth-First Search (Uses a Queue)
 
 - Starts at the root and visits all the nodes within a given level
 - Visits the neighbors before visiting the children
@@ -281,7 +281,50 @@ function levelOrderTraversal(root) {
 }
 ```
 
-### 5. Depth-First Search
+### 5. Depth-First Search (Uses a Stack)
+
+- Dives deep on a path as far as possible, before visiting the neighbors
+- It visits the children, before visiting the neighbors
+
+![alt text](image.png)
+
+| BFS                    | DFS                          |
+| ---------------------- | ---------------------------- |
+| Queue                  | Stack                        |
+| Iterative              | Recursive                    |
+| Best for shortest path | Best for exploring all paths |
+
+```js
+function dfsTree(root, target) {
+  if (!root) {
+    return null;
+  }
+
+  if (root.val === target) {
+    return root;
+  }
+
+  const left = dfsTree(root.left, target);
+
+  if (left) {
+    return left;
+  }
+
+  return dfsTree(root.right, target);
+}
+
+function dfsGraph(node, graph, visited = new Set()) {
+  for (const neighbor of graphs[node]) {
+    if (visited.has(neighbor)) {
+      continue;
+    }
+
+    visited.add(neighbor);
+
+    dfsGraph(neighbor, graph, visited);
+  }
+}
+```
 
 ### 6. Backtracking
 
