@@ -81,6 +81,7 @@ Based on: https://www.youtube.com/watch?v=8hly31xKli0&t
 - Tree: graph (no cycles)
 - Graph (with cycles)
   - we need to keep track of visited
+- BFS, DFS, Backtracking, Heaps, Dynamic programming
 
 ### 1. Two pointers
 
