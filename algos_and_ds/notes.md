@@ -179,7 +179,107 @@ function slidingWindow(nums, k) {
   - any condition that can be used for sorting
     - find minimum in rotated sorted array
 
+```js
+function binarySearch(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (nums[mid] === target) {
+      return mid;
+    }
+
+    if (nums[mid] < target) {
+      left = mid + 1; // search right half
+    } else {
+      right = mid - 1; // search left half
+    }
+  }
+
+  return -1;
+}
+```
+
 ### 4. Breadth-First Search
+
+- Starts at the root and visits all the nodes within a given level
+- Visits the neighbors before visiting the children
+- Uses a queue
+
+```
+             root
+
+  child  child      child   child ____ level 1 => BFS will visit all here
+
+leaf  leaf  leaf   leaf  leaf  leaf ___level 2 => then all here
+```
+
+```js
+function bfs(start, graph) {
+  const queue = [start];
+  const visited = new Set([start]);
+
+  while (queue.length) {
+    const node = queue.shift(); // dequeue
+    process(node); // custom logic
+
+    for (const neighbor of graph[node]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push(neighbor);
+      }
+    }
+  }
+}
+```
+
+```js
+/* 
+Binary Tree Level order traversal
+
+Given the root of a binary tree, return the level order traversal of its nodes' values (i.e, from left to right, level by level)
+
+       3 
+    9    20
+        15  7
+        root  level1 level 2
+result [[3],[9,20],[15,7]]
+          from left to right
+*/
+
+function levelOrderTraversal(root) {
+  if (!root) {
+    return [];
+  }
+
+  const result = [];
+  const queue = [root];
+
+  while (queue.length) {
+    const levelSize = queue.length;
+    const level = [];
+
+    for (let i = 0; i < levelSize; i++) {
+      const node = queue.shift();
+      level.push(node.val);
+
+      if (node.left) {
+        queue.push(node.left);
+      }
+
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+
+    result.push(level);
+  }
+
+  return result;
+}
+```
 
 ### 5. Depth-First Search
 
