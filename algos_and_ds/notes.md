@@ -328,9 +328,60 @@ function dfsGraph(node, graph, visited = new Set()) {
 
 ### 6. Backtracking
 
+- Similar to dfs
+- Differently from dfs, which has a pre-built structure, on Backtracking, you need to build it yourself
+  - The structure of the tree isn't given, but it's generated dynamically as you make decisions
+  - When a decision leads to a dead-end, you backtrack to the previous decision
+
+```js
+function backtrack(path, options) {
+  if (isComplete(path)) {
+    results.push([...path]); // store valid solution
+    return;
+  }
+
+  for (const option of options) {
+    if (!isValid(path, option)) {
+      continue;
+    }
+
+    path.push(option); // choose
+    backtrack(path, nextOptions(option)); // explore
+    path.pop();
+  }
+}
+```
+
 ### 7. Heap
 
+- Priority Queue (Top K)
+- Most common implementation of priority queues is a heap
+
+#### Min Heap
+
+- Used to find the K largest
+
+```
+      2
+  7       4
+9   13  5   76
+```
+
+#### Max Heap
+
+- Used to find the K smallest
+
+```
+      20
+  15      6
+9   8   4   2
+```
+
 ### 8. Dynamic programming
+
+- Considered the hardest pattern to learn
+- Top-down: backtracking + memoization
+- Bottom-up
 
 ## More advanced patterns
 
