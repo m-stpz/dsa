@@ -129,4 +129,44 @@ Input: nums = [0,0,1,1,1,2,2,3,3,4]
 Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
 Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
 It does not matter what you leave beyond the returned k (hence they are underscores).
+
+
+Algo design 
+
+- identify and remove duplicates
+- order should be kept
+- return num unique elements
+
+original: 0 0 1 1 1 2 2 3 3 4
+
+0 1 2 3 1 2 2 3 3 4
+      p1 => unique elements is p1 + 1 (since arrays are zero-indexed)
+                  p2
+
+if !equal:
+    p1++
+    nums[p1] = nums[p2] => not swapping! Assigning value
+
+if equal
+    p2++
+
 */
+
+function removeDuplicates(nums) {
+  let back = 0;
+  let front = 1; // first element is unique
+
+  while (front < nums.length) {
+    if (nums[front] !== nums[back]) {
+      back++; // important to increase back first. Before it, only unique elements
+      // what was previously in that index, becomes the new unique value "discovered" by front
+      nums[back] = nums[front];
+    }
+
+    front++;
+  }
+
+  return back + 1;
+}
+
+removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
