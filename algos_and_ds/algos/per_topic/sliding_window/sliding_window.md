@@ -4,6 +4,24 @@
 - Good to identify subarrays, substrings
 - Efficiency way to process a subset of data
 
+## Principles
+
+```
+1. Start the window
+
+for let i = 0 until < k
+
+2. Pick up from init window
+for let i = k until end array
+
+3. remove element
+sum -= nums[i - k]
+
+4. add element
+sum += nums[i]
+
+```
+
 ## Types
 
 ### Fixed sliding window
