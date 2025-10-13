@@ -20,3 +20,28 @@ for (let i = k; i < arr.length; i++) {
 sum += arr[i]; // add
 sum -= arr[i - k]; // remove
 ```
+
+## Using `Set`
+
+- Set stores unique values, no duplicates
+- It's optimized for fast lookup, insertion, and deletion O(1)
+
+### When to use it?
+
+1. Uniqueness: avoids duplicates
+2. Does this value exist?
+3. When you care about presence, NOT count
+4. Removing duplicates from arrays quickly
+
+```js
+[...new Set(arr)];
+```
+
+| method            | description            |
+| ----------------- | ---------------------- |
+| .add(value)       | inserts a value        |
+| .has(value)       | checks value existence |
+| .delete(value)    |                        |
+| .size             |                        |
+| .clear            |                        |
+| for...of / spread | for (const v of set){} |
