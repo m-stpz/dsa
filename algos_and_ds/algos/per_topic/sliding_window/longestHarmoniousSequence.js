@@ -33,58 +33,81 @@ Algo design
 1 2 2 2 3 3 5 7
 .sort((a, b) => a - b)
 
-1 2 2 2 3 3 5 7
-^
-  ^
+0 1 2 3 4 5 6 7 => index
+1 2 2 2 3 3 5 7 => .length (8)
+p1
+     p2
 
-1-2 = 4
-2-3 = 5 (I should know when to drop the prev count to return this one)
-    - should I use two arrays?
-        arr1 = [1,2,2,2].length
-        arr2 = [2,2,2,3,3].length
+2-1 = 1 
+2-1 = 1
+2-1 = 1
 
-        but then, I would need to do this for all possible numbers?
-            3 (start) - 1 === 2 (end) (good, keep going)
-            - we could increase the window by default
-            - we only "break" the window when
-                1 (start) + 1 = 2 (end) !== 3 
-                nums[start] + 1 !== nums[end]
+take the difference 
+p2(high) - p1(low)
+3 - 1 === 2
 
-                nums[start] - 1 !== nums[end]
-
-                start++
-                end++
-
-            - 3 + 1 !== 5 (instead of breaking the window, what if we just skip?)
-                => This is why I thought about sorting them first
-                - if we sort, we remove this need
-                - but when will we know that we should skip vs. break?
-                then, we'd break the window, however, we shouldn't
-
-- maxVal
-- minVal
-    their difference must be === 1
-- return longest subsequence among ALL its possible subsequences
-    - check all possible subsequences
-    - they don't need to be contiguous (in sequence)
-        - we need to know when to when to drop a subsequence in favor of another
-- return window that has biggest length
-- the fact that it's not in order, makes it more challenging
-    - what if we put them in order/sort?
-
-if difference between start and end > 1 (for more or less)
-if nums[start] + 1 < nums[end] || nums[start] - 1 
-    start++
-    end++
+p1 = 1 
+p2 = 4
+result = 3
 
 
+
+2 - 1 + 1 = 0
+
+1. sort it
+
+    p1 is within bounds
+while (p1 < sortedNums.length){
+    difference = sortedNums[p2] - sortedNums[p1] // and this
+
+    // this was the logic missing for situations such as [1,1,1,1]
+    if (difference === 1){
+        grab the max 
+        Math.max(result, p2 - p1 + 1) // I missed this totally
+    }
+
+    if (difference <= 1){
+        p2++ // increase window
+    } else {
+        p1++ // we broke the condition to keep increasing the window
+        // so, we must walk
+    }
+}
 
 
 Big O analysis
+t:
+    sort: O(n log n)
+
+
+s:
+
 */
 
 var findLHS = function (nums) {
-  // const
+  const sortedNums = nums.sort((a, b) => a - b); // t: O(n log n)
+
+  let p1 = 0;
+  let p2 = 1;
+  let result = 0;
+
+  //t: O(n)
+  while (p1 < sortedNums.length) {
+    // 2-1 == 1
+    let difference = sortedNums[p2] - sortedNums[p1];
+
+    if (difference === 1) {
+      result = Math.max(result, p2 - p1 + 1); // we add one, because we "include" the starting point
+    }
+
+    if (difference <= 1) {
+      p2++;
+    } else {
+      p1++;
+    }
+  }
+
+  return result;
 };
 
-findLHS([1, 3, 2, 2, 5, 2, 3, 7]);
+console.log(findLHS([1, 1, 1, 1]));
