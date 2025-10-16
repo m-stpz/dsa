@@ -45,3 +45,16 @@ sum -= arr[i - k]; // remove
 | .size             |                        |
 | .clear            |                        |
 | for...of / spread | for (const v of set){} |
+
+## Calculating the difference
+
+- In sorted:
+  diff = bigVal - smallVal
+
+## Math.max
+
+- Returns the largest number within a bound
+
+```js
+Math.max([1, 3, 5, 10, 8]); // returns 10
+```
