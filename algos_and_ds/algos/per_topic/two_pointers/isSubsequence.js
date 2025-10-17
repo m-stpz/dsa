@@ -89,3 +89,50 @@ var isSubsequence = function (s, t) {
 };
 
 isSubsequence("", "ahbgdc");
+
+/* 
+# Post Mortem
+
+Problem: Is subsequence
+Problem statement (one-liner): Identify whether a subsequence exists within given string
+Link: https://leetcode.com/problems/is-subsequence/?envType=study-plan-v2&envId=top-interview-150
+Date: 17.10.2025
+
+### Algorithm
+
+1. Pattern used: Two pointers
+2. Key idea (short explanation): 
+    - Loop until the end of t
+    - if s[p1] === t[p2]:
+        walk p1 and p2
+        increase the counter
+
+    - if, at the end, counter is equal to s.length, it means that all elements have been matched, therefore a subset
+3. Time to design the algorithm:
+    - 20-25min
+4. Time to code:
+    - 5-10 min
+5. Big O analysis:
+   t: O(t)/ Explanation: where t is the size of the input t
+   s: O(1)/ Explanation: no extra data structure created. just pointer manipulation
+6. What solutions did I consider/miss?
+    - Used two pointers correctly
+    - Identified well the need for "counter"
+7. Was your solution optimal? Yup
+8. What triggers did I find/miss?
+9. Any mistakes I keep making?
+    - Not on this one
+   - Any bugs I should add to the Bug List?
+10. What could I have done differently?
+11. Takeaways
+12. Is there anything I should add to my cheat sheet?
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 5
+Coding: 5
+Verification: 5
+Communication: 5
+*/
