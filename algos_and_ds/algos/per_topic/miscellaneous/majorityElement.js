@@ -59,8 +59,8 @@ var majorityElement = function (nums) {
   }
 
   for (const [key, value] of Object.entries(map)) {
-    if (value === majorityElement) {
-      return key;
+    if (value >= majorityElement) {
+      return Number(key);
     }
   }
 
