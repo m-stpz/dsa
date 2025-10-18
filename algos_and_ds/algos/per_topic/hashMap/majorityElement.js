@@ -50,14 +50,18 @@ var majorityElement = function (nums) {
   const majorityElement = Math.ceil(nums.length / 2);
 
   // build the frequence map
+  // t: O(n)
   for (let i = 0; i < nums.length; i++) {
     if (map[nums[i]] === undefined) {
+      // s: O(1) add element to map
       map[nums[i]] = 1;
     } else {
+      // s: O(1) increase the value of a key
       map[nums[i]] += 1;
     }
   }
 
+  // O(n)
   for (const [key, value] of Object.entries(map)) {
     if (value >= majorityElement) {
       return Number(key);
@@ -68,3 +72,49 @@ var majorityElement = function (nums) {
 };
 
 majorityElement([2, 2, 1, 1, 1, 2, 2]);
+
+/* 
+# Post Mortem
+
+Problem: Majority element
+Problem statement (one-liner): Find the element that appears more than ⌊n / 2⌋ times
+Link: https://leetcode.com/problems/majority-element/?envType=study-plan-v2&envId=top-interview-150
+Date: 18.10.2025
+
+### Algorithm
+
+1. Pattern used: Hash map to save the nums[i] as keys and their "count" as values
+  - We return the key which has the value >= majority element
+2. Key idea (short explanation): Save the key and values in a map and return the key of the element which has repeated the most
+3. Time to design the algorithm: 20min
+4. Time to code: 10 min 
+5. Big O analysis:
+   t:O(n) / Explanation:
+    - n === input 'n' length 
+    - O(n + n) => O(n)
+   s: / Explanation:
+    - O(n) because we initialize an map
+    - The map initializes in the worst case 'n' keys
+6. What solutions did I consider/miss?
+  - I considered using a hashmap to store key/value pairs
+  - I was able quite well to implement the map
+7. Was your solution optimal?
+  - Not necessarily. I needed to use two loops and a map
+8. What triggers did I find/miss?
+9. Any mistakes I keep making?
+   - Any bugs I should add to the Bug List?
+10. What could I have done differently?
+11. Takeaways
+  - Using maps is very useful
+12. Is there anything I should add to my cheat sheet?
+  - Hash maps and their operations
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 4
+Coding: 4
+Verification: 4
+Communication: 4
+*/
