@@ -58,3 +58,37 @@ sum -= arr[i - k]; // remove
 ```js
 Math.max([1, 3, 5, 10, 8]); // returns 10
 ```
+
+## Hash maps
+
+- They trade memory for speed
+- Ideal for: fast lookup, counting
+
+| Operation                               | Description                  | Average time |
+| --------------------------------------- | ---------------------------- | ------------ |
+| Insertion `map[key] = value`            | Add/update a key/value pair  | O(1)         |
+| Lookup `map[key]`                       | Retrive a value by key       | O(1)         |
+| Deletion map[key]                       | Remove a key/value pair      | O(1)         |
+| Iteration `for...in` / `Object.entries` | Traverse all keys or entries | O(n)         |
+
+```js
+Object.keys(obj); // → array of keys
+Object.values(obj); // → array of values
+Object.entries(obj); // → array of [key, value] pairs
+```
+
+### Comparing maps
+
+```js
+function compareMaps(mapA, mapB) {
+  for (const [key, valueA] of Object.entries(mapA)) {
+    const valueB = mapB[key];
+
+    if (!valueB || valueA !== valueB) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
