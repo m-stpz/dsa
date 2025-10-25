@@ -76,8 +76,48 @@ Output: true
 Example 3:
 Input: nums = [1,2,3,1,2,3], k = 2
 Output: false
+
+Algo design 
+- need to find whether that element is repeated within the window  
+- window should be a set (in this one)
+  - window.add/.delete/.size
+- window will have start/end pointers
+- start walks when window.size too big
+    - walks means:
+      window.delete(nums[start])
+      start++
+- end grows the window and adds elements to it
+
+k = 3 
+1 2 3 1 
+  s
+      e
+
+if it's, return true
+else false
 */
 
-/* 
-- does 
-*/
+function containsDuplicates(nums, k) {
+  const window = new Set();
+  let start = 0;
+  let end = 0;
+
+  while (end < nums.length) {
+    if (window.has(nums[end])) {
+      return true;
+    }
+
+    window.add(nums[end]);
+
+    if (window.size > k) {
+      window.delete(nums[start]);
+      start++;
+    }
+
+    end++;
+  }
+
+  return false;
+}
+
+containsDuplicates([1, 2, 3, 1, 2, 3], 2);

@@ -11,6 +11,43 @@ Input: nums = [1,2,3,4]
 Output: [24,12,8,6]
 Example 2:
 
+          1 2 3 4
+          ^ 
+            | right product
+
+1 2 3 4
+  ^ 
+  ^
+
+p1: 0 (where I break the loop)
+p2: 1 (where I multiply)
+product: 1 
+  - once we get to the end, we push the product
+
+p2 * product
+2 * 1
+3 * 2
+4 * 6
+
+
+
+
+
+
+
+left product ^
+1
+  2 * 3 * 4 => 24
+
+2 
+  1 * 3 * 4 => 12
+
+3
+  1 * 2 * 4 => 8
+
+4
+  1 * 2 * 3 => 6
+
 Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
 */
@@ -79,14 +116,21 @@ t: O(n^2)
 s: O(1)
 */
 
+// nums.length = 4 () => 4^2 (operations)
 var productExceptSelf = function (nums) {
   const res = []; // extra space
 
+  // 1(0)
   for (let i = 0; i < nums.length; i++) {
     let product = 1; // 2
 
+    /* 
+      1 * 1 (ignored) | 1 * 2 (2) | 2 * 3 (6) | 6 * 4 (24) 
+    */
+
     for (let j = 0; j < nums.length; j++) {
       if (i !== j) {
+        // ignore the self
         product *= nums[j];
       }
     }
