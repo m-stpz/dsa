@@ -29,8 +29,8 @@ Explanation: The decrypted code is [3+9, 2+3, 4+2, 9+4]. Notice that the numbers
 Algo design 
 code = nums arr
 k = key
-    if k > 0: each num is replaced by sum of next 3 nums (circular)
-    if k < 0: each num is replaced by the sum of prev 3 nums (circular)
+    if k > 0: each num is replaced by sum of next K nums (circular)
+    if k < 0: each num is replaced by the sum of prev K nums (circular)
     if k == 0: nums are replaced by zero
 
 code = [5,7,1,4], k = 3
@@ -101,14 +101,21 @@ var decrypt = function (code, k) {
     }
 
     if (k > 0) {
-      // sum the next 3 elements
-      //   how can we make it circular?
+      /* 
+        replace it by the next K numbers
+        j = 1 because we visit the next element and go upwards only to k
+            - that's the "window"
+        i + j % n => forward index
+        3 + 1 % 4 => 0, this way, we make it circular and don't go out of bounds
+        3 + 2 % 3 => 1, instead of 5, we go to one
+      */
       for (let j = 1; j <= k; j++) {
+        const forwardIndex = (i + j) % n;
         /* 
             i: 0
             j: 2
         */
-        sum += code[(i + j) % n]; // circular forward
+        sum += code[forwardIndex]; // circular forward
       }
 
       res.push(sum);
@@ -116,7 +123,12 @@ var decrypt = function (code, k) {
 
     if (k < 0) {
       for (let j = 1; j <= Math.abs(k); j++) {
-        sum += code[(i - j + n) % n]; // circular backward
+        /* 
+        backward index
+        (i - j + n)  % n
+        */
+        const backwardIndex = (i - j + n) % n;
+        sum += code[backwardIndex];
       }
 
       res.push(sum);
@@ -126,4 +138,35 @@ var decrypt = function (code, k) {
   return res;
 };
 
-decrypt([5, 7, 1, 4], 3);
+decrypt([2, 4, 9, 3], -2);
+
+/* 
+
+ATTENTION: TO CONTINUE!
+    - I need to understand how this circular mod works
+
+Post algo notes
+- The most challenging thing with this algo is the circular nature
+    - Not only that, it's a circular forward and backward
+
+- Confusing stuff
+1. sum += code[(i + j) % n]; // forward circular 
+
+k > 0
+    - forward case
+
+code = 5 7 1 4
+k = 3
+n = 4
+
+for (let i = 1; j <= k; j++){
+    sum += code[(i + j) % n]
+}
+
+
+2. sum += code[(i - j + n) % n]; // backward circular 
+3. in (let j = 1; j <= k; j++).. 
+    why: j = 1? 
+    and: j <= k?
+4. Why we didn't use a reverse loop?
+*/
