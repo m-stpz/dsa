@@ -6,6 +6,25 @@
   - Range sum queries: compute the sum of elements between two indices frequently
   - Subarray sum problems: find or count the number of subarrays that add up to a specific value
 
+## Core pattern
+
+```js
+const prefix = [0]; // simplifies math
+
+for (let i = 0; i < arr.length; i++) {
+  prefix.push(prefix[i] + arr[i]);
+}
+```
+
+## Range sum
+
+- `prefix[b] - prefix[a]` gives sum between `a` and `b-1`
+
+```js
+// then, because prefix[0], we need here to add + 1
+return prefix[right + 1] - prefix[left];
+```
+
 ```js
 function prefixSum(arr) {
   /* 
