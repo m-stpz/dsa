@@ -146,7 +146,7 @@ var decrypt = function (code, k) {
   return res;
 };
 
-decrypt([2, 4, 9, 3], -2);
+// decrypt([2, 4, 9, 3], -2);
 
 /* 
 Post algo notes
@@ -199,3 +199,61 @@ function decryptII(code, k) {
 }
 
 decryptII([2, 4, 9, 3], -2);
+
+/* 
+# Post Mortem
+
+Problem: Defuse the bomb
+Problem statement (one-liner): Given a code and a key (k), decrypt the code 
+Link: https://leetcode.com/problems/defuse-the-bomb/
+Date: 26.10.25
+
+### Algorithm
+
+1. Pattern used: 
+    - Circular array 
+    - Using n, step, count to design circular movements
+2. Key idea (short explanation):
+    - Create an outer loop to go over all elements
+    - Create an inner loop that moves within the array bounds (circular) with mod operations and within k bounds
+        for (let j = i; j <= k; j++){
+            const index = (i + j * step + n) % n
+            sum += arr[index]
+        }
+
+3. Time to design the algorithm: 60min
+4. Time to code: 60min
+5. Big O analysis:
+   t: O(n*k)/ Explanation:
+    n = the input size of code
+    k = the window we're given 
+   s: O(n)/ Explanation:
+    n = the input size
+    the result array scales according to the input size
+6. What solutions did I consider/miss?
+    - I considered the nested loop
+    - I tried using the sliding window, but had difficulty to implement it 
+    - I identified the "concept" of circular array, but didn't know how to implement it. Took notes on it 
+7. Was your solution optimal?
+    - Not necessarily, but good enough
+8. What triggers did I find/miss?
+    - I identified the circular array need 
+9. Any mistakes I keep making?
+   - Any bugs I should add to the Bug List?
+10. What could I have done differently?
+    - Not sure, quite glad with the result and learning process
+11. Takeaways
+    - Understand how to work with circular arrays
+    - Learn more about prefix sum
+12. Is there anything I should add to my cheat sheet?
+    - Circular array and prefix sum
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 3
+Coding: 3
+Verification: 3
+Communication: 4
+*/
