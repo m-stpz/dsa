@@ -1,12 +1,3 @@
-# Prefix Sum
-
-- Stores cumulative sum of elements from the start to a given index
-- Technique for calculating the sum of subarrays
-- When to use it?
-  - Range sum queries: compute the sum of elements between two indices frequently
-  - Subarray sum problems: find or count the number of subarrays that add up to a specific value
-
-```js
 function prefixSum(arr) {
   /* 
     arr = [1,2,3,4]
@@ -33,20 +24,41 @@ function prefixSum(arr) {
   return prefix;
 }
 
+/* 
+computes arr[left...right] in O(1) time
+
+arr = [1, 2, 3, 4]
+          0  1  2  3   4
+prefix = [0, 1, 3, 6, 10] => prefix sum is 1 step ahead of the initial array
+
+
+| prefix index | prefix value | represents sum of                 |
+| ------------ | ------------ | --------------------------------- |
+| 0            | 0            | (no elements)                     |
+| 1            | 1            | arr[0]                            |
+| 2            | 3            | arr[0] + arr[1]                   |
+| 3            | 6            | arr[0] + arr[1] + arr[2]          |
+| 4            | 10           | arr[0] + arr[1] + arr[2] + arr[3] |
+*/
 function rangeSum(prefix, left, right) {
   /* 
 computes the sum of left and right
             left    right       
     prefix: [0,1, 3, 6, 10]
     left: 0
-    right: 3
+    right: 3 + 1 = 4
 
-    prefix[3+1]
+    prefix[4] - prefix[0]
+    prefix[4] => sum of arr[0...4]
+    prefix[0] => sum of arr[0...0]
+
+    
+    10 - 0 => 10
+
+    prefix[3] - prefix[1]
+    6 - 1 = 5
     */
   return prefix[right + 1] - prefix[left];
 }
-```
 
-### Leetcode Problems
-
-https://leetcode.com/problem-list/prefix-sum/
+rangeSum(prefixSum([1, 2, 3, 4]), 0, 2);
