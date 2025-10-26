@@ -110,11 +110,14 @@ var decrypt = function (code, k) {
         3 + 2 % 3 => 1, instead of 5, we go to one
       */
       for (let j = 1; j <= k; j++) {
-        const forwardIndex = (i + j) % n;
         /* 
-            i: 0
-            j: 2
+            i = 1 (second iteration)
+            j = 3 (last element)
+            1 + 3 = 4 (index which would go out of bounds in an array with length 4)
+            1 + 3 % 4 (length) = 0, therefore we "go back" 
         */
+        const forwardIndex = (i + j) % n;
+
         sum += code[forwardIndex]; // circular forward
       }
 
@@ -126,6 +129,11 @@ var decrypt = function (code, k) {
         /* 
         backward index
         (i - j + n)  % n
+
+        i: 0
+        j: 1
+        (i - j + n) % n
+        (0 - 1 + 4) % 4 = 3 % 4 = 3 (index)
         */
         const backwardIndex = (i - j + n) % n;
         sum += code[backwardIndex];
@@ -141,10 +149,6 @@ var decrypt = function (code, k) {
 decrypt([2, 4, 9, 3], -2);
 
 /* 
-
-ATTENTION: TO CONTINUE!
-    - I need to understand how this circular mod works
-
 Post algo notes
 - The most challenging thing with this algo is the circular nature
     - Not only that, it's a circular forward and backward
@@ -163,10 +167,35 @@ for (let i = 1; j <= k; j++){
     sum += code[(i + j) % n]
 }
 
-
 2. sum += code[(i - j + n) % n]; // backward circular 
 3. in (let j = 1; j <= k; j++).. 
     why: j = 1? 
     and: j <= k?
-4. Why we didn't use a reverse loop?
 */
+
+function decryptII(code, k) {
+  const n = code.length;
+  const step = k > 0 ? 1 : -1;
+  const res = [];
+  const count = Math.abs(k);
+
+  for (let i = 0; i < n; i++) {
+    if (k === 0) {
+      res.push(0);
+      continue;
+    }
+
+    let sum = 0;
+
+    for (let j = 1; j <= count; j++) {
+      const index = (i + j * step + n) % n;
+      sum += code[index];
+    }
+
+    res.push(sum);
+  }
+
+  return res;
+}
+
+decryptII([2, 4, 9, 3], -2);

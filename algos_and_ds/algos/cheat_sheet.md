@@ -92,3 +92,63 @@ function compareMaps(mapA, mapB) {
   return true;
 }
 ```
+
+### Circular arrays
+
+#### Core pattern
+
+```js
+arr[(index + n) % n];
+```
+
+- Keep index inside bounds [0, n-1]
+- Works for positive and negative index
+- `+ n` prevents negative results before % n
+
+#### Forward traversal
+
+- Moves right
+- If out of bounds right, go back the beginning
+
+```js
+for (let j = 1; j <= k; j++) {
+  const fwdIndex = (i + j) % n;
+  sum += arr[fwdIndex];
+}
+```
+
+#### Backward traversal
+
+- Move left
+- If out of bounds left, go back to the end
+
+```js
+for (let j = 1; j <= k; j++) {
+  const bkwIndex = (i - j + n) % n;
+  sum += arr[bkwIndex];
+}
+```
+
+#### Bidirectional template
+
+```js
+const n = arr.length;
+const step = k > 0 ? 1 : -1;
+const count = Math.abs(k);
+
+for (let i = 0; i < n; i++) {
+  let sum = 0;
+
+  for (let j = 1; j <= count; j++) {
+    sum += arr[(i + j * step + n) % n];
+  }
+}
+```
+
+#### Further notes
+
+- why j starts at 1?
+  - j = 1 skips the current element
+  - j <= k, ensures the window size
+
+### Prefix sum
