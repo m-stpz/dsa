@@ -140,3 +140,87 @@ var isIsomorphic = function (s, t) {
 };
 
 isIsomorphic("egg", "add");
+
+/* 
+egg
+add
+
+isomorphic = characters in s can be replaced to get t 
+- preserve the order 
+- no two characters may map to the same character (unique mapping)
+
+0 1 2
+e g g
+
+0: {
+    is_new_element,
+},
+1: {
+    is_new_element: true,
+},
+2: {
+    is_new_element:false,
+    first_encountered: 1 (index)
+}
+
+how can I identify when the element was first encountered?
+
+a d a
+0: {
+    is_new_element,
+},
+1: {
+    is_new_element: true,
+},
+2: {
+    is_new_element:false,
+    first_encountered: 0 (index)
+}
+
+0 1 2
+e g g g
+      ^
+      ^  
+
+0 1 2
+e g e
+    ^ 
+^
+*/
+
+var isIsomorphic = function (s, t) {
+  const sMap = {};
+  const tMap = {};
+
+  for (let i = 0; i < s.length; s++) {
+    buildMap(sMap, nums[i]);
+  }
+
+  for (let i = 0; i < t.length; t++) {
+    buildMap(tMap, nums[i]);
+  }
+};
+
+function buildMap(object, key) {
+  if (!object[key]) {
+    object[key] = {
+      isNewElement: true,
+    };
+  } else {
+    object[key] = {
+      isNewElement: false,
+      // helper to track the first occurrence of an element
+    };
+  }
+}
+
+/*
+Good stuff
+- through learning
+- clear communication
+- concepts are becoming more solid 
+
+To improve
+- Speed 
+- Design no-code solution first, then code it out
+*/

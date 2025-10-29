@@ -81,7 +81,7 @@ calculate ranges:
 
 */
 
-var pivotIndex = function (nums) {
+var pivotIndexBruteForce = function (nums) {
   const n = nums.length;
 
   for (let i = 0; i < n; i++) {
@@ -129,4 +129,38 @@ function calculateSum(startIndex, endIndex, currIndex, nums) {
   return sum;
 }
 
-pivotIndex([1, 7, 3, 6, 5, 6]);
+pivotIndexBruteForce([1, 7, 3, 6, 5, 6]);
+
+/* 
+arr => 1 2 3 4 
+prefix => 0 1 3 6 10
+total = prefix[n] => 10
+
+leftSum = arr[i]
+rightSum = total - arr[i + 1]
+
+*/
+
+function pivotIndexPrefixSum(nums) {
+  const n = nums.length;
+  const prefix = [0];
+
+  // create prefix arr (running sum)
+  for (let i = 0; i < n; i++) {
+    prefix.push(prefix[i] + nums[i]);
+  }
+
+  const total = prefix[n];
+
+  for (let i = 0; i < n; i++) {
+    // left and right sum
+    const leftSum = prefix[i];
+    const rightSum = total - prefix[i + 1]; // + 1 because we "discount" 0
+
+    if (leftSum === rightSum) {
+      return i;
+    }
+  }
+
+  return -1;
+}
