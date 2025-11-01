@@ -101,6 +101,14 @@ var maxProfitWrongFirstImplementation = function (prices) {
   return high > 0 ? profit : 0;
 };
 
+/**
+ * t: O(n)
+ *    - n: prices.length
+ *    - single pass
+ * s: O(1)
+ *  - constant extra space
+ *  - no data struc that grows with input
+ */
 var maxProfit = function (prices) {
   let minPrice = Infinity;
   let maxProfit = 0;
@@ -123,13 +131,44 @@ var maxProfit = function (prices) {
 maxProfit([2, 4, 1]);
 
 /* 
-[7, 1, 5, 3, 6, 4]
-^
+# Post Mortem
 
-minPrice = 7
-maxProfit
-    loop
-        minPrice = min(minPrice, price)
+Problem: Best time to buy sell stock
+Problem statement (one-liner): Identify the best possible day to buy and sell the stock and return the profit
+Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+Date: 01.11.2025
 
+### Algorithm
 
+1. Pattern used: finding lowest and highest nums
+2. Key idea (short explanation):
+    - Store minPrice and maxProfit
+        - Loop through elements
+        - minPrice becomes either the new min, or keep as prev min
+        - profit is the difference between current element and minPrice
+        - maxProfit becomes either the new profit, or keep as prev maxProfit
+3. Time to design the algorithm: 40min. (but my algo didn't work well, it failed the last 20-30% of tests. I needed to search solution)
+4. Time to code: 40min.
+6. What solutions did I consider/miss?
+    - keeping maxProfit out of the loop
+    - profit being equal to currentElement - minProfit
+7. Was your solution optimal?
+    - Updated solution yes
+8. What triggers did I find/miss?
+9. Any mistakes I keep making?
+   - Any bugs I should add to the Bug List?
+10. What could I have done differently?
+    - Simplify and try to solve the most basic part first
+11. Takeaways
+    - Simplify
+12. Is there anything I should add to my cheat sheet?
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 3
+Coding: 3
+Verification: 3
+Communication: 4
 */
