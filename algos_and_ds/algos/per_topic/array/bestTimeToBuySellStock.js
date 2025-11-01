@@ -78,36 +78,58 @@ currentProfit =
             - the profit should not change if new low comes after high index
         2 not 3
 
-output: 2
- - how?
 */
 
-// TO CONTINUE
+var maxProfitWrongFirstImplementation = function (prices) {
+  let low = Infinity;
+  let high = -Infinity;
+  let profit = -Infinity;
+
+  for (let i = 0; i < prices.length; i++) {
+    let currentLow = low;
+
+    low = Math.min(item, low);
+    high = Math.max(item, high);
+
+    profit = Math.max(high - low, profit);
+
+    if (currentLow !== low) {
+      high = 0;
+    }
+  }
+
+  return high > 0 ? profit : 0;
+};
+
 var maxProfit = function (prices) {
   let minPrice = Infinity;
   let maxProfit = 0;
 
   for (let i = 0; i < prices.length; i++) {
+    // only reset the minPrice if a new minPrice value is found
     minPrice = Math.min(minPrice, prices[i]);
 
+    // get the current profit, which is the difference of the new minPrice vs. the current element
     const profit = prices[i] - minPrice;
 
+    // only reset maxProfi if a new high profit is found
     maxProfit = Math.max(maxProfit, profit);
   }
 
   return maxProfit;
 };
 
-// let minPrice = Infinity;
-// let maxProfit = 0;
-// for (let i = 0; i < prices.length; i++) {
-//   minPrice = Math.min(minPrice, prices[i]);
-//   const profit = prices[i] - minPrice;
-//   maxProfit = Math.max(maxProfit, profit);
-// }
-
-// return maxProfit;
-
 // maxProfit([7, 1, 5, 3, 6, 4]);
-
 maxProfit([2, 4, 1]);
+
+/* 
+[7, 1, 5, 3, 6, 4]
+^
+
+minPrice = 7
+maxProfit
+    loop
+        minPrice = min(minPrice, price)
+
+
+*/
