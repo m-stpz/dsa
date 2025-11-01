@@ -151,4 +151,14 @@ for (let i = 0; i < n; i++) {
   - j = 1 skips the current element
   - j <= k, ensures the window size
 
-### Prefix sum
+## Linked Lists
+
+- Traversing a linked list
+
+```js
+let current = head;
+
+while (current) {
+  current = current.next;
+}
+```
