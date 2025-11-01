@@ -27,3 +27,5 @@ function buildLinkedListFromArray(values) {
 }
 
 buildLinkedListFromArray([3, 2, 0, -4]);
+
+module.exports = { buildLinkedListFromArray, ListNode };
