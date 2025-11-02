@@ -162,3 +162,95 @@ while (current) {
   current = current.next;
 }
 ```
+
+```js
+class ListNode {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  // traverse
+  traverse() {
+    let current = this.head;
+
+    while (current) {
+      current = current.next;
+    }
+  }
+
+  // append: add to end
+  append(val) {
+    const newNode = new ListNode(val);
+
+    // what if the linked list is empty?
+    if (!this.head) {
+      this.head = newNode;
+      return; // return it!
+    }
+
+    let current = this.head;
+
+    // go until the end
+    // while current.next!
+    while (current.next) {
+      current = current.next;
+    }
+
+    // once, at the end, add our next node as element
+    current.next = newNode;
+  }
+
+  // prepend: add to beginning
+  prepend(val) {
+    const newNode = new ListNode(val);
+
+    newNode.next = this.head;
+    this.head = newNode;
+  }
+
+  // find
+  find(val) {
+    let current = this.head;
+
+    while (current) {
+      if (current.val === val) {
+        return current;
+      }
+      // walk it!
+      current = current.next;
+    }
+
+    return null;
+  }
+
+  // delete
+  delete(val) {
+    if (!this.head) {
+      return;
+    }
+
+    if (this.head.val === val) {
+      this.head = this.head.next;
+      reutrn;
+    }
+
+    let current = this.head;
+
+    // walk until there are elements and none of the next elements is our val
+    while (current.next && current.next.val !== val) {
+      current = current.next;
+    }
+
+    if (current.next) {
+      current.next = current.next.next;
+    }
+  }
+}
+```

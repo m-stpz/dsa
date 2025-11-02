@@ -46,25 +46,23 @@ return head merge
 
 === Big O analysis ===
 
-t: O(n * m)
-    n: list1.length
-    m: list2.length
+t: O(n + m)
+    n = list1.length
+    m = list2.length
+    - traverse each list once
 
-s: O(n * m)
-    - merge grows relative to the lists length
+s: O(1)
+  - reuse existing nodes and changing next pointers
+  - extra space for few pointers (constant)
 */
-
-// to continue
 var mergeTwoLists = function (list1, list2) {
-  // we initialize a new linked list
+  // we initialize a new linked list (which will store the merged result)
   const head = new ListNode(0);
   // initially, tail is equal to the head
   let tail = head;
 
   // while there are elements in both lists...
   while (list1 && list2) {
-    // compare the elements
-
     // if list1.val is less than list2.val
     if (list1.val < list2.val) {
       // add list1 current node to our new "merged" linked list
@@ -92,3 +90,59 @@ mergeTwoLists(
   buildLinkedListFromArray([1, 2, 4]),
   buildLinkedListFromArray([1, 3, 4])
 );
+
+/* 
+# Post Mortem
+
+Problem: Merge two sorted linked lists
+Problem statement (one-liner): NA
+Link: https://leetcode.com/problems/merge-two-sorted-lists
+Date: 02.10.2025
+
+### Algorithm
+
+1. Pattern used: Linked list 
+2. Key idea (short explanation):
+  - Create a new head 
+  - Tail is equal to head
+  - Loop through two lists (while list1 && list2)
+    - compare the elements
+    - if list1.val is greater than list2.val, it means that...
+      - tail.next = list1  list1.val should be added to the sorted linked list
+      - list1 = list1.next => walk list one
+    - else
+        ... add to the merged list the list2
+        - tail.next = list2
+        - list2 = list2.next 
+    tail = tail.next walk tail at the end
+3. Time to design the algorithm: 20min
+4. Time to code: 20min
+5. What solutions did I consider/miss?
+  - Considered:
+    - Compare the elements
+    - Basic logic was thought of, but I didn't how to put it all together
+  - Missed:
+    - Creating a new linked list
+    - Adding the elements to this list, instead of an array
+    - What I'd do with the missing elements
+6. Was your solution optimal?
+  - Yep, t:O(n+m), s:O(1)
+7. What triggers did I find/miss?
+8. Any mistakes I keep making?
+   - Any bugs I should add to the Bug List?
+9. What could I have done differently?
+10. Takeaways
+  - Working with linked lists
+  - Adding elements to linked lists
+11. Is there anything I should add to my cheat sheet?
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving:
+Coding:
+Verification:
+Communication:
+
+*/
