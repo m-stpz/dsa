@@ -34,44 +34,116 @@ Constraints:
         - no need to check leading 0's
 
 === Algo design ===
-1 2 3 
-- Preserve decimals 
-- how to transform 1 into 12, preserving the decimals?
-- I need to have
-    decimal
-    hundred
-    thousands..
+[1,2,3] => 123 + 1 = 124
+     ^
 
-1, 2, 3 => 1 2 3 
-    - remove the commas
-    - convert it to number, add + 1
-    - convert back to array of nums
+    if value === 9
+        carry += 1
+        currvalue = 0
+    else: 
+        increase the rightmost element
 
-1, 2, 3 
-123 + 1 => 124 => 1, 2, 4
+1 2 3
+    ^
+- we could loop right to left (reverse loop)
+- if last digit
+    - replace value with it +1
 
+1 2 4
+---
+4 3 2 2 
+      ^
+---
+9 0
+^
 
+add one to the beginning
+1 0 0 
+^
+
+  - we need to deal with 9
+  - 9 becomes 0
+  - carry = 1
+    - we "carry one" from right to left
+    - if value === 9, continue carrying it leftware
+    - if value < 9, add carry to current digit
+    
 === Big O ===
 t: O(n)
+    - single pass digits
     - n: digits.length
-    - .split() => remove comma
-    - toString => built in complexity? O(n)?
-    - .split() => to add comma back
 
-s: O(n)
-    - toString
-    - addOne
+s: O(1)
+    - constant memory 
+    - no extra space besides "carry"
 */
 
 var plusOne = function (digits) {
-  // split only works in strings
-  const digit = digits.join("");
-  const plusOne = Number(digit) + 1;
-  const resultArr = String(plusOne)
-    .split("")
-    .map((el) => Number(el));
+  // reverse loop
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i]++;
+      return digits; // only do it once
+    } else {
+      digits[i] = 0;
+    }
+  }
 
-  return resultArr;
+  // in case we have all 9's
+  digits.unshift(1);
+  return digits;
 };
 
 plusOne([1, 2, 3]);
+
+/* 
+# Post Mortem
+
+Problem: Plus one
+Problem statement (one-liner): Given an array of single digits, return their result + 1
+Link: https://leetcode.com/problems/plus-one/
+Date: 03.11.25
+
+### Algorithm
+
+1. Pattern used: 
+    - Reversed loop and adding one
+2. Key idea (short explanation):
+    - Travese the array from right to left
+        - If digit is less than 9
+            - add 1 
+            - return 
+        - If digit is 9
+            - carry over (make the element 0)
+    - if we haven't returned it, it means we've got "only 9's", so it means we need to add "1" to the beginning
+        - digits.unshift(1)
+3. Time to design the algorithm: 30min (I couldn't solve it by myself, needed to search)
+4. Time to code: 10min
+5. What solutions did I consider/miss?
+    - Missed
+        - Reverse loop
+        - Doing it as we'd do 'by hand'
+        - dealing with 9 edge cases and "normal" cases 
+6. Was your solution optimal?
+    - The current solution, it is, but I needed help
+7. What triggers did I find/miss?
+8. Any mistakes I keep making?
+    - I should have thought about:
+        - traversing it reversed
+        - dealing with 9 edge case
+            - carrying the value
+   - Any bugs I should add to the Bug List?
+9. What could I have done differently?
+10. Takeaways
+    - Remember the principles
+11. Is there anything I should add to my cheat sheet?
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 3
+Coding: 3
+Verification: 4 
+Communication: 4
+*/
