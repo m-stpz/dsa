@@ -186,6 +186,29 @@ e g g g
 e g e
     ^ 
 ^
+
+positive scenario 
+e: a   
+g: d
+g: d
+
+a: e
+d: g
+d: g
+====
+negative scenario 
+
+str1Char: str2Char
+f: b
+o: a
+o: r(a) 
+  return false
+
+  identify whether a key maps to two different values. If yes, return false
+
+b: f
+a: o
+r: o
 */
 
 var isIsomorphic = function (s, t) {
@@ -223,4 +246,55 @@ Good stuff
 To improve
 - Speed 
 - Design no-code solution first, then code it out
+*/
+
+var isIsomorphic2 = function (s, t) {
+  const sMap = {};
+  const tMap = {};
+
+  for (let i = 0; i < s.length; s++) {
+    let sChar = s[i];
+    let tChar = t[i];
+
+    /* 
+    No two characters may map to the same character, but a character may map to itself.
+      e: a
+      g: d
+      g: d
+
+      a: e
+      d: g
+      d: g
+    ===
+      f: b
+      o: a
+      o: r
+
+      b: f
+      a: o
+      r: o
+    */
+
+    // if the elements exist, verify the key:value matching
+    if (
+      (sMap[sChar] && sMap[sChar] !== tChar) ||
+      (tMap[tChar] && tMap[tChar] !== sChar)
+    ) {
+      return false;
+    }
+
+    sMap[sChar] = tChar;
+    tMap[tChar] = sChar;
+  }
+
+  return true;
+};
+
+/* 
+- linked lists
+- arrays 
+- two pointers
+- sliding window (more or less)
+- hash maps 
+- prefix sum (more to less than to more)
 */

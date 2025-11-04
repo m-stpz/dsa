@@ -175,3 +175,55 @@ function mergeAlternately3(word1, word2) {
 
   return res.join("");
 }
+
+/* 
+# Post Mortem
+
+Problem: Merge strings alternately
+Problem statement (one-liner): Merge two strings 
+Link: https://leetcode.com/problems/merge-strings-alternately
+Date: 04.11.2025
+
+### Algorithm
+
+1. Pattern used: 
+  - Two pointers 
+2. Key idea (short explanation):
+  - Have a pointer for str1 and another for str2
+  - 1st: merge the elements until both are within bounds
+    - add first from str1
+    - add second from str2 
+    - increase pointers
+
+  - 2nd: identify if there are missing elements (pointer is < than str.length)
+    - if that's the case, continue merging 
+3. Time to design the algorithm: 30min
+4. Time to code: 20min
+5. What solutions did I consider/miss?
+  - I had difficulties identifying what to do with remaining elements
+  - On my first solution, on the same loop I tried to deal with existing and non-existing cases, instead of doing this separately
+  - I could have first dealt with the existing elements, then non-existing ones
+6. Was your solution optimal?
+  - The second and third one, yes
+7. What triggers did I find/miss?
+8. Any mistakes I keep making?
+    - Break the problem as much as possible
+    - Create one solution for a portion of the problem, if some cases are still left, expand it 
+      - Instead of trying to solve everything at once!
+   - Any bugs I should add to the Bug List?
+9. What could I have done differently?
+  - I could have considered treating the both situations differently
+10. Takeaways
+  - Make your life easier by breaking the problem down as much as possible!
+  - Build a first solution, keep iterating
+11. Is there anything I should add to my cheat sheet?
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 3
+Coding: 3
+Verification: 3
+Communication: 3
+*/
