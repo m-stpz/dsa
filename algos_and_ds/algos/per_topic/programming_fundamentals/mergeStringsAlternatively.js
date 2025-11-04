@@ -120,7 +120,7 @@ mergeAlternately("ab", "pqrs");
 var mergeAlternately2 = function (word1, word2) {
   let p1 = 0;
   let p2 = 0;
-  let res = [];
+  let res = []; // using array because it's more effective to manipulate
 
   // while within bounds, add them in order
   while (p1 < word1.length && p2 < word2.length) {
@@ -148,9 +148,30 @@ var mergeAlternately2 = function (word1, word2) {
     }
   }
 
-  const resString = res.join("");
+  const resString = res.join(""); // transform array into string
 
   return resString;
 };
 
 mergeAlternately2("ab", "pqrs");
+
+function mergeAlternately3(word1, word2) {
+  let res = [];
+  // we grab the max length
+  let maxLength = Math.max(word1.length, word2.length);
+
+  // loop only until max length
+  for (let i = 0; i < maxLength; i++) {
+    // if i is still within word1 bounds, push it
+    if (i < word1.length) {
+      res.push(word1[i]);
+    }
+
+    // if i is still within word2 bounds, push it
+    if (i < word2.length) {
+      res.push(word2[i]);
+    }
+  }
+
+  return res.join("");
+}
