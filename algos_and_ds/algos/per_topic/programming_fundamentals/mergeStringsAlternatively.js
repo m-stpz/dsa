@@ -116,3 +116,41 @@ var mergeAlternately = function (word1, word2) {
 };
 
 mergeAlternately("ab", "pqrs");
+
+var mergeAlternately2 = function (word1, word2) {
+  let p1 = 0;
+  let p2 = 0;
+  let res = [];
+
+  // while within bounds, add them in order
+  while (p1 < word1.length && p2 < word2.length) {
+    res.push(word1[p1]);
+    res.push(word2[p2]);
+
+    p1++;
+    p2++;
+  }
+
+  // grab the remainders
+  // if there are still elements, use them
+  if (p1 < word1.length) {
+    while (p1 < word1.length) {
+      res.push(word1[p1]);
+
+      p1++;
+    }
+  }
+
+  if (p2 < word2.length) {
+    while (p2 < word2.length) {
+      res.push(word2[p2]);
+      p2++;
+    }
+  }
+
+  const resString = res.join("");
+
+  return resString;
+};
+
+mergeAlternately2("ab", "pqrs");
