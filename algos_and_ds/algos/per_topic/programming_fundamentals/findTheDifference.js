@@ -24,6 +24,13 @@ s and t consist of lowercase English letters.
 === Algo design ===
 s = "abcd", t = "abcde"
 
+"st"
+"t"
+
+map = {
+    a: "s"
+}
+
 sMap = {
     a: 1
     b: 1
@@ -59,18 +66,30 @@ loop over t
 */
 
 var findTheDifference = function (s, t) {
-  let map = {};
+  let sMap = {};
+  let tMap = {};
 
-  for (let i = 0; i < t.length; i++) {
-    let sChar = s[i];
-    let tChar = t[i];
-
-    if (map[tChar] !== sChar) {
-      return tChar;
+  for (let char of s) {
+    if (!sMap[char]) {
+      sMap[char] = 1;
+    } else {
+      sMap[char] += 1;
     }
+  }
 
-    map[tChar] = sChar;
+  for (let char of t) {
+    if (!tMap[char]) {
+      tMap[char] = 1;
+    } else {
+      tMap[char] += 1;
+    }
+  }
+
+  for (let [key, value] of Object.entries(tMap)) {
+    if (!sMap[key] || value !== sMap[key]) {
+      return key;
+    }
   }
 };
 
-findTheDifference("abcd", "abcde");
+findTheDifference("a", "aa");
