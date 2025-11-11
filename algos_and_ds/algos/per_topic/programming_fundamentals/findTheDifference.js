@@ -63,6 +63,13 @@ loop over t
     tMap[tChar] = sChar
 
 === Big O analysis === 
+t: O(n)
+    n = t.length 
+    t.length = s.length + 1
+s: O(1)
+    even though we need extra memory for the new maps,
+    there are only 26 letters in the alphabet. There are our keys, so they can't grow beyond 26
+    - The keys would (in case that's repeated letter), however, that's constant time
 */
 
 var findTheDifference = function (s, t) {
@@ -93,3 +100,75 @@ var findTheDifference = function (s, t) {
 };
 
 findTheDifference("a", "aa");
+
+function findTheDifference2(s, t) {
+  let map = {};
+
+  for (const char of s) {
+    // other alternative
+    // #1. ternary: map[char] = map[char] ? map[char] + 1 : 1
+    // #2. logical or: map[char] = (map[char] || 0) + 1 => we either either the map char it's there, or we set it to 0 + 1 = 1
+
+    if (!map[char]) {
+      map[char] = 1;
+    } else {
+      map[char] += 1;
+    }
+  }
+
+  for (const char of t) {
+    if (!map[char]) {
+      return char;
+    }
+    // we also need to subtract the entries from the map
+    map[char]--;
+  }
+}
+
+/* 
+# Post Mortem
+
+Problem: Find the difference 
+Problem statement (one-liner): Identify the element in t that it's not in s
+Link: https://leetcode.com/problems/find-the-difference
+Date: 11.11.25
+
+### Algorithm
+
+1. Pattern used: hash map
+2. Key idea (short explanation):
+    - build 2 maps: smap and tmap
+        - if no key, initialize it with one
+        - else, increase the key's value
+    - compare the maps
+        - identify if:
+            - the element in tmap doesn't exist in smap
+            - the count in tmap is not equal to smap 
+        - if that's the case, that's the difference
+3. Time to design the algorithm: 20min
+4. Time to code: 10min
+5. What solutions did I consider/miss?
+    - Considered:
+        - using hash map to solve it
+    - Missed:
+        I think I was able to solve it well
+6. Was your solution optimal?
+    - Not necessarily, there were other more optimal solutions, which involved some weird bit manipulation,
+    but I prefer mine for clarity
+7. What triggers did I find/miss?
+8. Any mistakes I keep making?
+   - Any bugs I should add to the Bug List?
+9. What could I have done differently?
+10. Takeaways
+11. Is there anything I should add to my cheat sheet?
+    Initiliaze or increment dict
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving: 5
+Coding: 5
+Verification: 5
+Communication: 5
+*/

@@ -93,6 +93,24 @@ function compareMaps(mapA, mapB) {
 }
 ```
 
+### Initialize or increment
+
+```js
+// instead of
+for (let key of object) {
+  if (!object[key]) {
+    object[key] = 1;
+  } else {
+    object[key] += 1;
+  }
+}
+
+// We can simplify
+for (let key of object) {
+  object[key] = (object[key] ?? 0) + 1;
+}
+```
+
 ### Circular arrays
 
 #### Core pattern
