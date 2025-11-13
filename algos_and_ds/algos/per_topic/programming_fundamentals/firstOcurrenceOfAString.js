@@ -87,8 +87,10 @@ var strStr = function (haystack, needle) {
     } else {
       pNeedle = 0;
       firstOcc = -1;
+      i--;
     }
   }
+
   return firstOcc;
 };
 
