@@ -1,3 +1,25 @@
+## Arrays
+
+### Comparing indexes with arr length
+
+```js
+const str = "cat"
+
+    (lastIndex)
+0 1 2
+c a t
+
+length = 3
+lastIndex = 3 - 1 = 2
+
+loop {
+  // are we at the last element?
+  if (element === arr.length -1) {
+    ...
+  }
+}
+```
+
 ## Sliding Window
 
 - Init window (loop1), then slide it (loop2)

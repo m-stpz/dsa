@@ -144,3 +144,55 @@ function strStrBrute(haystack, needle) {
 }
 
 strStrBrute("mississippi", "issip");
+
+/* 
+# Post Mortem
+
+Problem: Find substring within string 
+Problem statement (one-liner): Find a needle in the haystack 
+Link: https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string
+Date: 14.11.25
+
+### Algorithm
+
+1. Pattern used: Nested loops 
+2. Key idea (short explanation): 
+  - Outer loop: what if the string started here?
+    - Inner loop: let's check whether they match
+      haystack[i + j] !== needle[j] => this is really important!
+        especially: haystack[i + j]: this is how we "walk" our haystack in combination with our needle
+    - if j === needle.length -1 (meaning, we go to the end)
+      we've got our result
+3. Time to design the algorithm: 1h30 (I needed to watch videos and search)
+4. Time to code: 20min
+5. What solutions did I consider/miss?
+  - I couldn't solve this by myself
+  - Considered:
+    - j as the "counter" pointer. if it was the same as the needle, done
+    - looping through them "together"
+  - Missed:
+    - Using nested loops for it 
+    - Tried to use two pointers, unsucessfully. My original code worked up to certain points, but hit many edge-cases
+    - Outer loop "respecting" the needle's length (possibleRange)
+6. Was your solution optimal?
+    - The one I search and implemented, yeah
+7. What triggers did I find/miss?
+8. Any mistakes I keep making?
+   - Any bugs I should add to the Bug List?
+   - Be careful about the index and length of the array when matching them
+9. What could I have done differently?
+  - Maybe trying brute force first?
+10. Takeaways
+  - Sometimes, you've got to search. That's fine 
+11. Is there anything I should add to my cheat sheet?
+  - Checking indexes against arr.length
+
+### Self-rating
+
+1(terrible) - 5(amazing)
+
+Problem solving:
+Coding:
+Verification:
+Communication:
+*/
