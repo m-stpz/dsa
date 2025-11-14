@@ -87,7 +87,6 @@ var strStr = function (haystack, needle) {
     } else {
       pNeedle = 0;
       firstOcc = -1;
-      i--;
     }
   }
 
@@ -97,3 +96,51 @@ var strStr = function (haystack, needle) {
 // strStr("sadbutsad", "sad");
 // strStr("aaaa", "aaa");
 strStr("mississippi", "issip");
+
+/* 
+Algo design II
+
+sadbutsad | sda
+ i
+            j 
+
+firstOcc =  1           
+if i != j:
+  don't walk j 
+
+  but if j, reset it
+
+if j == needle.length
+  return firstOcc
+
+
+*/
+
+/**
+ * Big O
+ * t: O(n * m)
+ *  n = haystack.length
+ *  m = needle.length
+ * s: O(1)
+ */
+function strStrBrute(haystack, needle) {
+  const possibleRange = haystack.length + 1 - needle.length; // ensure there's enough room to fit the needle
+
+  // what if the needle starts here?
+  for (let i = 0; i < possibleRange; i++) {
+    for (let j = 0; j < needle.length; j++) {
+      // this stops the substring once any mismatch is found and returns to the outer loop
+      if (haystack[i + j] !== needle[j]) {
+        break;
+      }
+
+      if (j === needle.length - 1) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
+}
+
+strStrBrute("mississippi", "issip");
