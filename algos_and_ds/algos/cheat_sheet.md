@@ -133,6 +133,27 @@ for (let key of object) {
 }
 ```
 
+### Frequency map
+
+- Useful when count matters, but order doesn't
+- Instead of creating 2 maps, and checking their keys and values, create just one, a freq map
+
+```js
+const freqMap = {};
+
+// build frequency map
+for (const char of str) {
+  freqMap[str[char]] = (freqMap[str[char]] ?? 0) + 1; // increase it
+}
+
+// validate count
+for (const count of Object.values(freqMap)) {
+  if (count !== 0) {
+    return false;
+  }
+}
+```
+
 ### Circular arrays
 
 #### Core pattern

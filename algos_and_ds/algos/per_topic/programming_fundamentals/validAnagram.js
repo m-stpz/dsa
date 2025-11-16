@@ -138,3 +138,33 @@ Coding: 5
 Verification: 5
 Communication: 5
 */
+
+/**
+ * In my previous solution, I used two maps and compared their key on a 3rd loop
+ * Instead, I could keep a freq map
+ *  - increase count for s
+ *  - decrease count for t
+ *  - if anything !== 0, not an anagram
+ *
+ * Frequency maps are important when count matters, but order no
+ */
+var isAnagramImproved = function (s, t) {
+  if (s.length !== t.length) {
+    return false;
+  }
+
+  let freqMap = {};
+
+  for (let i = 0; i < s.length; i++) {
+    freqMap[s[i]] = (freqMap[s[i]] ?? 0) + 1; // s increases
+    freqMap[t[i]] = (freqMap[t[i]] ?? 0) - 1; // t decreases
+  }
+
+  for (const count of Object.values(freqMap)) {
+    if (count !== 0) {
+      return false;
+    }
+  }
+
+  return true;
+};
