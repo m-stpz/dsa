@@ -161,16 +161,12 @@ Communication:
  */
 var mergeTwoLists = function (list1, list2) {
   // part 1: dealing with empty lists
-  if (!list1 && list2) {
+  if (!list1) {
     return list2;
   }
 
-  if (!list2 && list1) {
+  if (!list2) {
     return list1;
-  }
-
-  if (!list1 && !list2) {
-    return null;
   }
 
   // part 2: dealing with order
