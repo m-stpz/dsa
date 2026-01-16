@@ -101,6 +101,13 @@ Verification: 4
 Communication: 4
 */
 
+/* 
+t: O(n^2)
+  - n = linked_list.length
+    - for each element, we add a further loop
+s: O(n)
+  - n = linked_list.length
+*/
 var hasCycleII = function (head) {
   // head might be null
   if (!head) {
@@ -131,4 +138,33 @@ var hasCycleII = function (head) {
   return false;
 };
 
-hasCycle(buildLinkedListFromArray([3, 2, 0, -4]));
+hasCycleII(buildLinkedListFromArray([3, 2, 0, -4]));
+
+/* 
+t: O(n)
+  n = ll.length
+s: O(n)
+  n = ll.length
+*/
+var hasCycleIII = function (head) {
+  if (!head) {
+    return false;
+  }
+
+  // set => set stores unique values
+  // if element already exists, then return true
+  // lookup/insert/delete O(1)
+  const visited = new Set();
+
+  while (head) {
+    // checking elements on sets is: O(1)
+    if (visited.has(head)) {
+      return true;
+    }
+
+    visited.add(head);
+    head = head.next;
+  }
+
+  return false;
+};
