@@ -27,6 +27,8 @@ function ListNode(val) {
     - if encount a node that we've seen, there's a cycle
 */
 
+const { buildLinkedListFromArray } = require("./buildLinkedList");
+
 /**
  * Big O
  *
@@ -98,3 +100,35 @@ Coding: 4
 Verification: 4
 Communication: 4
 */
+
+var hasCycleII = function (head) {
+  // head might be null
+  if (!head) {
+    return false;
+  }
+
+  const visited = [];
+
+  while (head) {
+    for (let i = 0; i < visited.length; i++) {
+      if (head.val === visited[i].val && head.next === visited[i].next) {
+        return true;
+      }
+    }
+
+    visited.push(head);
+    head = head.next;
+  }
+
+  // for (let i = 0; i < visited.length; i++) {
+  //   for (let j = 0; j < visited.length; j++) {
+  //     if (i.val === j.val && i.next === j.next) {
+  //       return true;
+  //     }
+  //   }
+  // }
+
+  return false;
+};
+
+hasCycle(buildLinkedListFromArray([3, 2, 0, -4]));

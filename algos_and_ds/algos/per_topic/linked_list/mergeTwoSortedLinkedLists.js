@@ -198,11 +198,10 @@ var mergeTwoLists = function (list1, list2) {
     }
   }
 
-  if (!cl && cr) {
+  // part 3: dealing with the remainder
+  if (!cl) {
     body.next = cr;
-  }
-
-  if (!cr && cl) {
+  } else {
     body.next = cl;
   }
 
