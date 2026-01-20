@@ -168,3 +168,27 @@ var hasCycleIII = function (head) {
 
   return false;
 };
+
+// should have constant space
+// - two pointers
+var hasCycleIV = function (head) {
+  if (!head) {
+    return false;
+  }
+
+  let p1 = head;
+  let p2 = head;
+
+  while (p2 && p2.next) {
+    // first, move the pointers
+    p1 = p1.next;
+    p2 = p2.next.next;
+
+    // then, check the condition
+    if (p1.next === p2.next) {
+      return true;
+    }
+  }
+
+  return false;
+};
