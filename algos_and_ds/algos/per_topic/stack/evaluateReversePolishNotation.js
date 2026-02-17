@@ -35,17 +35,24 @@ Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
 
 */
 
+/**
+ * t: O(n)
+ * s: O(n)
+ *  n = tokens.length
+ */
 var evalRPN = function (tokens) {
-  const operators = new Set(["+", "-", "*", "/"]);
+  const operators = new Set(["+", "-", "*", "/"]); // s: O(1)
   const stack = [];
 
+  // t: O(n)
   for (let char of tokens) {
+    // t: O(1)
     if (operators.has(char) && stack.length >= 2) {
-      const firstElement = Number(stack.pop());
+      const firstElement = Number(stack.pop()); // t: O(1)
       const secondElement = Number(stack.pop());
 
       const result = calculateResult(firstElement, secondElement, char);
-      stack.push(result);
+      stack.push(result); // t: O(1)
     } else {
       stack.push(char);
     }
@@ -54,6 +61,7 @@ var evalRPN = function (tokens) {
   return Number(stack[0]);
 };
 
+// arimethcs, no increase time | space
 function calculateResult(firstElement, secondElement, char) {
   switch (char) {
     case "+":
