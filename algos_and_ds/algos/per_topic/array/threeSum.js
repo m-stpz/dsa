@@ -58,3 +58,43 @@ var threeSum = function (nums) {
 
 threeSum([-1, 0, 1, 2, -1, -4]);
 // threeSum([-1, 0, 1]);
+
+const opposite = (num) => -num;
+
+function threeSumOptimized(nums) {
+  const visited = new Set([]);
+  const sorted = nums.sort((a, b) => a - b);
+
+  const opposite = (num) => -num;
+
+  for (let i = 0; i < sorted.length; i++) {
+    let start = i + 1;
+    let end = sorted.length - 1;
+    let current = sorted[i];
+    let target = opposite(current); // get the opposite element
+
+    while (start < end) {
+      const pointersSum = sorted[start] + sorted[end]; // not sure if it's "sum"
+
+      if (target < pointersSum) {
+        end--;
+      } else if (target > pointersSum) {
+        start++;
+      } else {
+        visited.add(JSON.stringify([current, sorted[start], sorted[end]]));
+        start++;
+        end--;
+      }
+    }
+  }
+
+  let result = [];
+
+  for (const item of Array.from(visited.values())) {
+    result.push(JSON.parse(item));
+  }
+
+  return result;
+}
+
+threeSumOptimized([-1, 0, 1, 2, -1, -4]);
